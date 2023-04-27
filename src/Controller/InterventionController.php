@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Intervention;
 use App\Repository\InterventionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function PHPUnit\Framework\throwException;
+
 #[Route('/intervention', name: 'app_intervention_')]
 class InterventionController extends AbstractController
 {
@@ -16,5 +19,17 @@ class InterventionController extends AbstractController
         return $this->render('intervention/index.html.twig', [
             'interventions' => $intervention,
         ]);
+    }
+
+    #[Route('/add', name: "add")]
+    public function addIntervention(InterventionRepository $interventionRepository, ?Intervention $interv) : ?string {
+
+        if ($interv) {
+            $interventionRepository -> save($interv);
+        }
+        else {
+            return "L'objet à sauvegarder n'est pas valide";
+        }
+        return null;
     }
 }
