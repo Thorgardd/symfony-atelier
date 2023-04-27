@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            {% if app.user %}
+                <li>
+                    <a href="{{ path('app_home') }}">Acceuil</a>
+                </li>
+                {% if "ROLE_CLIENT" in app.user.roles %}
+                    <li>
+                        <a href="{{ path('app_intervention_add') }}">Réserver</a>
+                    </li>
+                {% endif %}
+                {% if "ROLE_TECH" in app.user.roles %}
+                    <li>
+                        <a href="{{ path('app_intervention_list') }}">Interventions</a>
+                    </li>
+                {% endif %}
+                {% if "ROLE_COLLAB" in app.user.roles %}
+                    <li>
+                        <a href="#">Réservations</a>
+                    </li>
+                    <li>
+                        <a href="#">Véhicules</a>
+                    </li>
+                    <li>
+                        <a href="#">Assignations</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="{{ path('app_logout') }}">Déconnexion</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{ path('app_register') }}">Inscription</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_login') }}">Connexion</a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
