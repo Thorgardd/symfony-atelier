@@ -39,6 +39,24 @@ class InterventionRepository extends ServiceEntityRepository
         }
     }
 
+    public function interventionComplexQuery() : array {
+        $conn = $this -> getEntityManager() -> getConnection();
+
+        $sql = "SELECT intervention.id, intervention.date, intervention.is_terminated, client.email AS client_email, tech.email AS tech_email
+                FROM intervention
+                LEFT JOIN user AS client ON intervention.client_id = client.id
+                LEFT JOIN user AS tech ON intervention.tech_id = tech.id;
+";
+
+        $rqst = $conn -> prepare($sql);
+
+        $result = $rqst -> executeQuery([]);
+
+        return $result -> fetchAllAssociative();
+
+
+    }
+
 //    /**
 //     * @return Intervention[] Returns an array of Intervention objects
 //     */

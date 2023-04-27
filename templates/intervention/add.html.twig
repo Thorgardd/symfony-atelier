@@ -1,9 +1,0 @@
-{% extends 'base.html.twig' %}
-{% block title %} Ajout d'une réservation {% endblock %}
-{% block body %}
-    {{ form_start(interventionAdd) }}
-        {{ form_row(interventionAdd.date) }}
-        {{ form_row(interventionAdd.client) }}
-        {{ form_row(interventionAdd.vehicule) }}
-    {{ form_end(interventionAdd) }}
-{% endblock %}

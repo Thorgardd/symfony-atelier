@@ -14,44 +14,23 @@ class Intervention
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'client', cascade: ['persist', 'remove'])]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $client = null;
 
-    #[ORM\OneToOne(inversedBy: 'vehicule', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Car $vehicule = null;
+    private ?User $tech = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[ORM\Column]
+    private ?bool $isTerminated = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getClient(): ?User
-    {
-        return $this->client;
-    }
-
-    public function setClient(User $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    public function getVehicule(): ?Car
-    {
-        return $this->vehicule;
-    }
-
-    public function setVehicule(Car $vehicule): self
-    {
-        $this->vehicule = $vehicule;
-
-        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
@@ -62,6 +41,42 @@ class Intervention
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getClient(): ?User
+    {
+        return $this->client;
+    }
+
+    public function setClient(?User $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getTech(): ?User
+    {
+        return $this->tech;
+    }
+
+    public function setTech(?User $tech): self
+    {
+        $this->tech = $tech;
+
+        return $this;
+    }
+
+    public function isIsTerminated(): ?bool
+    {
+        return $this->isTerminated;
+    }
+
+    public function setIsTerminated(bool $isTerminated): self
+    {
+        $this->isTerminated = $isTerminated;
 
         return $this;
     }

@@ -1,19 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InterventionController!{% endblock %}
+{% block title %}Gestionnaire d'interventions{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/jerem/Desktop/Workshop/src/Controller/InterventionController.php'|file_link(0) }}">src/Controller/InterventionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/jerem/Desktop/Workshop/templates/intervention/index.html.twig'|file_link(0) }}">templates/intervention/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% for intervention in interventions %}
+        <div class="container">
+            <div class="card">
+                <h3 class="card-title">Intervention</h3>
+                <div class="card-body">
+                    <p>Technicien : {{ intervention.tech_email }} <br/>
+                        Client : {{ intervention.client_email }} <br/>
+                        Date :{{ intervention.date }}
+                    </p>
+                    {% if intervention.is_terminated %}
+                        <p>Terminée</p>
+                    {% else %}
+                        <p>Programée</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
