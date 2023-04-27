@@ -33,6 +33,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/intervention, roles: ["ROLE_CLIENT", "ROLE_TECH"] }
+        - { path: ^//intervention/add, roles: ROLE_CLIENT}
 
 when@test:
     security:
